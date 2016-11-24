@@ -2,6 +2,7 @@ import pygame
 from color import Color
 from window import Window
 from game import Game
+from shapes import *
 
 class Board:
 
@@ -58,10 +59,9 @@ class Board:
                 tile = self.boardTiles[y][x]
                 tilesymb = self.board[y][x]
                 if tilesymb == "X":
-                    pygame.draw.line(Window.DISPLAYSURF, Color.BLACK, tile.topleft, tile.bottomright, 3)
-                    pygame.draw.line(Window.DISPLAYSURF, Color.BLACK, tile.topright, tile.bottomleft, 3)
+                    ShapeX().draw(Window.DISPLAYSURF, Color.BLACK, tile.center, tile.width, tile.height)
                 if tilesymb == "O":
-                    pygame.draw.circle(Window.DISPLAYSURF, Color.BLACK, tile.center, int(tile.width / 2))
+                    ShapeO().draw(Window.DISPLAYSURF, Color.BLACK, tile.center, tile.width)
 
         pygame.display.update()
 

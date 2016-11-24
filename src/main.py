@@ -16,6 +16,8 @@ players = ["X", "O"]
 
 def run():
 
+    surface.displayMenu()
+
     while True:
 
         playing = True
@@ -39,6 +41,7 @@ def run():
 
                 if game.checkWinner(board.board, symbol):
                     playing = False
+                    surface.displayWinner(symbol)
                     break
                 CLOCK.tick(surface.FPS)
 
