@@ -3,19 +3,18 @@ from window import Window
 from board import Board
 from game import Game
 
-class Main:
+surface = Window()
+board = Board()
+game = Game()
 
-    surface = Window()
-    board = Board()
-    game = Game()
+pygame.init()
 
-    playing = True
+CLOCK = pygame.time.Clock()
 
-    pygame.init()
+players = ["X", "O"]
 
-    CLOCK = pygame.time.Clock()
 
-    players = ["X", "O"]
+def run():
 
     while True:
 
@@ -35,7 +34,7 @@ class Main:
                     game.getEvent()
                     game.clicked = board.checkClick(game.mousePos, symbol)
 
-                game.clicked = False  #to prevent the game from freezing
+                game.clicked = False  # to prevent the game from freezing
                 board.updateBoard()
 
                 if game.checkWinner(board.board, symbol):
@@ -45,3 +44,7 @@ class Main:
 
             if not playing:
                 break
+
+if __name__ == "__main__":
+    run()
+
