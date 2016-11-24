@@ -37,3 +37,12 @@ class Game:
                 (board[0][2] == playerSymbol and board[1][2] == playerSymbol and board[2][2] == playerSymbol) or  # down the right side
                 (board[0][0] == playerSymbol and board[1][1] == playerSymbol and board[2][2] == playerSymbol) or  # diagonal
                 (board[0][2] == playerSymbol and board[1][1] == playerSymbol and board[2][0] == playerSymbol))  # diagonal
+
+    def checkTie(self, board):
+
+        for row in board:
+            for symbol in row:
+                if symbol == '':
+                    return False
+
+        return True

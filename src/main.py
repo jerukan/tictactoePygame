@@ -43,6 +43,11 @@ def run():
                     playing = False
                     surface.displayWinner(symbol)
                     break
+                elif game.checkTie(board.board):
+                    playing = False
+                    surface.displayTie()
+                    break
+
                 CLOCK.tick(surface.FPS)
 
             if not playing:
