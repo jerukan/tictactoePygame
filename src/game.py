@@ -3,7 +3,8 @@ from pygame.locals import *
 
 class Game:
 
-    mousePos = (0, 0)
+    clickPos = (-1, -1)
+    mousePos = (-1, -1)
     clicked = False
 
     def getEvent(self):
@@ -13,10 +14,13 @@ class Game:
                 sys.exit()
 
             if event.type == MOUSEBUTTONDOWN:
-                self.mousePos = pygame.mouse.get_pos()
+                self.clickPos = pygame.mouse.get_pos()
                 self.clicked = True
             if event.type == MOUSEBUTTONUP:
                 self.clicked = False
+
+            if event.type == MOUSEMOTION:
+                self.mousePos = (event.pos[0], event.pos[1])
 
     def isClicked(self):
         return self.clicked

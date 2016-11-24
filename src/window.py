@@ -40,6 +40,6 @@ class Window:
 
     def displayTie(self):
         self.displayWindow()
-        self.drawText("there was a tie. No one won", 325, 200)
+        self.drawText("there was a tie. no one won", 325, 200)
         self.drawText("click anywhere to play another game", 325, 300)
         pygame.display.update()

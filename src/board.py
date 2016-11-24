@@ -28,6 +28,8 @@ class Board:
 
     def displayBoard(self):
 
+        Window().displayWindow()
+
         # left vertical line
         pygame.draw.line(Window.DISPLAYSURF, Color.BLACK, (self.columnX[0], 0), (self.columnX[0], Window.WINDOWHEIGHT), 5)
         # right vertical line
@@ -52,6 +54,22 @@ class Board:
                         return Game.clicked
                 else:
                     Game.clicked = False
+
+    def checkMousePosition(self, mousePos):
+        for y in range(0, len(self.board)):
+            for x in range(0, len(self.board[y])):
+                if self.boardTiles[y][x].collidepoint(mousePos):
+                    if self.isClickable(self.board[y][x]):
+                        return self.boardTiles[y][x]
+
+        return None
+
+    def highlightTile(self, tile):
+        if tile is None:
+            return
+        pygame.draw.rect(Window.DISPLAYSURF, Color.GREEN, tile)
+
+        pygame.display.update()
 
     def updateBoard(self):
         for y in range(0, len(self.board)):

@@ -1,4 +1,4 @@
-import pygame
+import pygame, time
 from window import Window
 from board import Board
 from game import Game
@@ -23,18 +23,20 @@ def run():
         playing = True
         board.resetBoard()
         game.waitForInput()
-        game.mousePos = (-1, -1)
 
         while playing:
 
             for symbol in players:
-                surface.displayWindow()
+                game.clickPos = (-1, -1)
                 board.displayBoard()
                 board.updateBoard()
 
                 while not game.isClicked():
                     game.getEvent()
-                    game.clicked = board.checkClick(game.mousePos, symbol)
+                    board.displayBoard()
+                    board.updateBoard()
+                    board.highlightTile(board.checkMousePosition(game.mousePos))
+                    game.clicked = board.checkClick(game.clickPos, symbol)
 
                 game.clicked = False  # to prevent the game from freezing
                 board.updateBoard()
