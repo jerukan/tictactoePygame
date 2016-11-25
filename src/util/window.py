@@ -1,12 +1,14 @@
 import pygame
 from pygame.locals import *
-from color import Color
+
+from util.color import Color
+
 
 class Window:
 
     pygame.init()
 
-    WINDOWWIDTH = 650
+    WINDOWWIDTH = 750
     WINDOWHEIGHT = 600
 
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
@@ -26,20 +28,19 @@ class Window:
         textRect.center = (x, y)
         self.DISPLAYSURF.blit(textObj, textRect)
 
-
     def displayMenu(self):
         self.displayWindow()
-        self.drawText("click anywhere to start the game", 325, 275)
+        self.drawText("click anywhere to start the game", int(self.WINDOWWIDTH / 2), int(self.WINDOWHEIGHT / 2))
         pygame.display.update()
 
     def displayWinner(self, winner):
         self.displayWindow()
-        self.drawText(winner + " won!", 325, 200)
-        self.drawText("click anywhere to play another game", 325, 300)
+        self.drawText(winner + " won!", int(self.WINDOWWIDTH / 2), int(self.WINDOWHEIGHT / 2))
+        self.drawText("click anywhere to play another game", int(self.WINDOWWIDTH / 2), int(self.WINDOWHEIGHT / 2) + 50)
         pygame.display.update()
 
     def displayTie(self):
         self.displayWindow()
-        self.drawText("there was a tie. no one won", 325, 200)
-        self.drawText("click anywhere to play another game", 325, 300)
+        self.drawText("there was a tie. no one won", int(self.WINDOWWIDTH / 2), int(self.WINDOWHEIGHT / 2))
+        self.drawText("click anywhere to play another game", int(self.WINDOWWIDTH / 2), int(self.WINDOWHEIGHT / 2) + 50)
         pygame.display.update()

@@ -1,7 +1,7 @@
-import pygame
-from window import Window
-from board import Board
-from game import Game
+import pygame, time
+
+from util import *
+from players import *
 
 surface = Window()
 board = Board()
@@ -11,7 +11,7 @@ pygame.init()
 
 CLOCK = pygame.time.Clock()
 
-players = ["X", "O"]
+players = [Player(), Computerai()]
 
 
 def run():
@@ -26,24 +26,13 @@ def run():
 
         while playing:
 
-            for symbol in players:
-                game.clickPos = (-1, -1)
-                board.displayBoard()
-                board.updateBoard()
+            for playa in players:
 
-                while not game.isClicked():
-                    game.getEvent()
-                    board.displayBoard()
-                    board.updateBoard()
-                    board.highlightTile(board.checkMousePosition(game.mousePos))
-                    game.clicked = board.checkClick(game.clickPos, symbol)
-                    pygame.display.update()
-                game.clicked = False  # to prevent the game from freezing
-                board.updateBoard()
+                playa.playTurn(board, game)
 
-                if game.checkWinner(board.board, symbol):
+                if game.checkWinner(board.board, playa.SYMBOL):
                     playing = False
-                    surface.displayWinner(symbol)
+                    surface.displayWinner(playa.SYMBOL)
                     break
                 elif game.checkTie(board.board):
                     playing = False

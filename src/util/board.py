@@ -1,8 +1,10 @@
-import pygame
-from color import Color
-from window import Window
-from game import Game
+import pygame, random
+
 from shapes import *
+from util.color import Color
+from util.game import Game
+from util.window import Window
+
 
 class Board:
 
@@ -59,13 +61,15 @@ class Board:
                 if self.boardTiles[y][x].collidepoint(mousePos):
                     if self.isClickable(self.board[y][x]):
                         return self.boardTiles[y][x]
-
         return None
 
     def highlightTile(self, tile):
         if tile is None:
             return
-        pygame.draw.rect(Window.DISPLAYSURF, Color.GREEN, tile)
+        highlightSurface = pygame.Surface((tile.width, tile.height))
+        highlightSurface = highlightSurface.convert_alpha()
+        highlightSurface.fill(Color.GREEN)
+        Window.DISPLAYSURF.blit(highlightSurface, tile.topleft)
 
     def updateBoard(self):
         for y in range(0, len(self.board)):
@@ -86,3 +90,11 @@ class Board:
             return True
         else:
             return False
+
+    def randomMoveFromList(self, theList):
+        possibleMoves = []
+        for i in theList:
+            if self.isClickable(self.board[i[0]][i[1]]):
+                possibleMoves.append(i)
+
+        return random.choice(possibleMoves)
