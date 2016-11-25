@@ -97,4 +97,7 @@ class Board:
             if self.isClickable(self.board[i[0]][i[1]]):
                 possibleMoves.append(i)
 
-        return random.choice(possibleMoves)
+        if len(possibleMoves) > 0:
+            return random.choice(possibleMoves)
+
+        return None

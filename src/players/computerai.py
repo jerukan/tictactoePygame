@@ -1,5 +1,4 @@
 import pygame, copy
-from util import *
 from players.player import Player
 
 class Computerai():
@@ -20,6 +19,7 @@ class Computerai():
                         board.updateBoard()
                         pygame.display.update()
                         return
+                boardCopy = copy.deepcopy(board.board)
 
         #then checks if the player will win next turn and block it
         for y in range(0, len(boardCopy)):
@@ -31,18 +31,19 @@ class Computerai():
                         board.updateBoard()
                         pygame.display.update()
                         return
+                boardCopy = copy.deepcopy(board.board)
+
+        # take the center
+        if board.isClickable(board.board[1][1]):
+                board.board[1][1] = self.SYMBOL
+                board.updateBoard()
+                pygame.display.update()
+                return
 
         #take the corners
         choice = board.randomMoveFromList([[0, 0], [0, 2], [2, 0], [2, 2]])
         if choice is not None:
             board.board[choice[0]][choice[1]] = self.SYMBOL
-            board.updateBoard()
-            pygame.display.update()
-            return
-
-        #take the center
-        if board.isClickable(board.board[1][1]):
-            board.board[1][1] = self.SYMBOL
             board.updateBoard()
             pygame.display.update()
             return
