@@ -1,4 +1,4 @@
-import pygame, time
+import pygame
 from window import Window
 from board import Board
 from game import Game
@@ -37,7 +37,7 @@ def run():
                     board.updateBoard()
                     board.highlightTile(board.checkMousePosition(game.mousePos))
                     game.clicked = board.checkClick(game.clickPos, symbol)
-
+                    pygame.display.update()
                 game.clicked = False  # to prevent the game from freezing
                 board.updateBoard()
 
@@ -49,6 +49,8 @@ def run():
                     playing = False
                     surface.displayTie()
                     break
+
+                pygame.display.update()
 
                 CLOCK.tick(surface.FPS)
 

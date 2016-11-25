@@ -39,8 +39,6 @@ class Board:
         # bottom row
         pygame.draw.line(Window.DISPLAYSURF, Color.BLACK, (self.rowX[0], self.rowY[1]), (self.rowX[1], self.rowY[1]), 5)
 
-        pygame.display.update()
-
     def checkClick(self, mousePos, playpiece):
         for y in range(0, len(self.board)):
             for x in range(0, len(self.board[y])):
@@ -69,8 +67,6 @@ class Board:
             return
         pygame.draw.rect(Window.DISPLAYSURF, Color.GREEN, tile)
 
-        pygame.display.update()
-
     def updateBoard(self):
         for y in range(0, len(self.board)):
             for x in range(0, len(self.board[y])):
@@ -80,8 +76,6 @@ class Board:
                     ShapeX().draw(Window.DISPLAYSURF, Color.BLACK, tile.center, tile.width, tile.height)
                 if tilesymb == "O":
                     ShapeO().draw(Window.DISPLAYSURF, Color.BLACK, tile.center, tile.width)
-
-        pygame.display.update()
 
     def resetBoard(self):
 
