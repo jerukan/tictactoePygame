@@ -1,4 +1,5 @@
-import pygame, time
+import pygame, time, sys
+from pygame.locals import *
 
 from util import *
 from players import *
@@ -26,16 +27,25 @@ def run():
 
         while playing:
 
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+
             for playa in players:
 
                 playa.playTurn(board, game)
 
                 if game.checkWinner(board.board, playa.SYMBOL):
                     playing = False
+                    pygame.display.update()
+                    time.sleep(1)
                     surface.displayWinner(playa.SYMBOL)
                     break
                 elif game.checkTie(board.board):
                     playing = False
+                    pygame.display.update()
+                    time.sleep(1)
                     surface.displayTie()
                     break
 
